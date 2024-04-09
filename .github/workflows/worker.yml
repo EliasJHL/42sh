@@ -2,11 +2,11 @@ name: 42sh_Checker
 
 on:
   push:
-    branches-ignore:
-      - 'ga-ignore-*'
+    branches:
+      - main
   pull_request:
-    branches-ignore:
-      - 'ga-ignore-*'
+    branches:
+      - main
 
 env:
   EXECUTABLES: "42sh"
@@ -40,10 +40,16 @@ jobs:
   
   valgrind_check:
     runs-on: ubuntu-latest
-    if: github.workspace == '' || !contains(github.event.head_commit.modified, 'Makefile')
     needs: [check_coding_style]
     steps:
       - uses: actions/checkout@v4
+      - name: Check if 42sh exist
+        run: |
+          if [ ! -f Makefile ]; then
+            echo "Error: There's not project."
+            exit 1
+          fi
+          exit 0
       - name: Install Valgrind
         run: sudo apt-get install valgrind -y
       - name: Run Valgrind
