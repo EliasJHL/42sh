@@ -35,45 +35,15 @@ Pour lancer 42sh, il suffit de taper la commande suivante dans un terminal:
 
 ## Team - Organisation
 
-===|[pierool2000](https://github.com/pierool2000) |===
+[pierool2000](https://github.com/pierool2000)
 
-inhibitors
+[EliasJHL](https://github.com/eliasjhl)
 
-globbings
+[Sawayuuh](https://github.com/Sawayuuh)
 
-line edition
+[brahimbenali](https://github.com/brahimbenali)
 
-_____________________________
-
-===| [EliasJHL](https://github.com/eliasjhl) |===
-
-backticks
-
-scripting
-
-_____________________________
-
-===| [Sawayuuh](https://github.com/Sawayuuh) |===
-
-variables
-
-multi pipe + multi redirection
-
-_____________________________
-
-===|[brahimbenali](https://github.com/brahimbenali) |===
-
-parentheses
-
-history
-
-_____________________________
-
-===| [EnzoLC](https://github.com/enzolc) |===
-
-job control
-
-aliases
+[EnzoLC](https://github.com/enzolc)
 
 ## Licence
 
