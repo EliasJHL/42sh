@@ -43,7 +43,7 @@ globbings
 
 line edition
 
-====================
+_____________________________
 
 ===| [EliasJHL](https://github.com/eliasjhl) |===
 
@@ -51,7 +51,7 @@ backticks
 
 scripting
 
-====================
+_____________________________
 
 ===| [Sawayuuh](https://github.com/Sawayuuh) |===
 
@@ -59,7 +59,7 @@ variables
 
 multi pipe + multi redirection
 
-====================
+_____________________________
 
 ===|[brahimbenali](https://github.com/brahimbenali) |===
 
@@ -67,7 +67,7 @@ parentheses
 
 history
 
-====================
+_____________________________
 
 ===| [EnzoLC](https://github.com/enzolc) |===
 
