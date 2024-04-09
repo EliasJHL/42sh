@@ -15,7 +15,7 @@ env:
 jobs:
   check_coding_style:
     runs-on: ubuntu-latest
-    if: github.repository != 'git@github.com:EliasJHL/42sh.git'
+    if: github.repository != 'git@github.com:EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen.git'
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
