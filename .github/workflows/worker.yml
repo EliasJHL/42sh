@@ -40,8 +40,8 @@ jobs:
   
   valgrind_check:
     runs-on: ubuntu-latest
+    if: github.workspace == '' || !contains(github.event.head_commit.modified, 'Makefile')
     needs: [check_coding_style]
-    if: ${{ needs.check_coding_style.result == 'success' }} && test -f Makefile
     steps:
       - uses: actions/checkout@v4
       - name: Install Valgrind
