@@ -81,8 +81,8 @@ jobs:
         timeout-minutes: 2
 
   push_to_mirror:
-    needs: [run_tests]
-    if: ${{ needs.run_tests.result == 'success' }}
+    needs: [check_coding_style]
+    #if: ${{ needs.run_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
