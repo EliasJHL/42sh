@@ -15,7 +15,7 @@ env:
 jobs:
   check_coding_style:
     runs-on: ubuntu-latest
-    if: github.repository != 'git@github.com:EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen.git'
+    if: github.repository != 'EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen.git'
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
@@ -124,7 +124,7 @@ jobs:
         timeout-minutes: 2
 
   push_to_mirror:
-    needs: [check_coding_style]
+    needs: [run_tests]
     #if: ${{ needs.run_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
