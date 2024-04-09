@@ -19,13 +19,12 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: check_coding
+      - name: Check.sh script
         run: check.sh $(pwd) $(pwd)
-      - name: coding
+      - name: Coding style check
         run: |
           if [ -s coding-style-reports.log ]; then
             while IFS= read -r line
@@ -39,10 +38,22 @@ jobs:
           fi
           rm -f coding-style-reports.log
   
-  check_program_compilation:
+  valgrind_check:
     runs-on: ubuntu-latest
     needs: [check_coding_style]
-    if: ${{ needs.check_coding_style.result == 'success' }}
+    if: ${{ needs.check_coding_style.result == 'success' }} && test -f Makefile
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Valgrind
+        run: sudo apt-get install valgrind -y
+      - name: Run Valgrind
+        run: echo -e "ls" > valgrind --error-exitcode=1 --leak-check=full ./42sh
+        timeout-minutes: 2
+
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    needs: [valgrind_check]
+    if: ${{ needs.valgrind_check.result == 'success' }}
     container:
       image: epitechcontent/epitest-docker:latest
     defaults:
@@ -50,12 +61,12 @@ jobs:
         working-directory: .
     steps:
       - uses: actions/checkout@v4
-      - name: make_command
+      - name: Copilation test
         run: make
         timeout-minutes: 2
-      - name: clean_command
+      - name: Clean
         run: make clean
-      - name: check_exec
+      - name: Execution test
         run: |
           for file in $EXECUTABLES; do
             if [ ! -x "$file" ]; then
@@ -76,7 +87,7 @@ jobs:
         working-directory: .
     steps:
       - uses: actions/checkout@v4
-      - name: Run tests
+      - name: Bonus test
         run: make tests_run
         timeout-minutes: 2
 
