@@ -1,4 +1,4 @@
-name: chocolatine
+name: 42sh_Checker
 
 on:
   push:
