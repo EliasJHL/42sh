@@ -9,7 +9,7 @@ on:
       - 'ga-ignore-*'
 
 env:
-  EXECUTABLES: "my_paint"
+  EXECUTABLES: "42sh"
   MIRROR_URL: "git@github.com:EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen.git"
 
 jobs:
@@ -85,7 +85,7 @@ jobs:
     #if: ${{ needs.run_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
