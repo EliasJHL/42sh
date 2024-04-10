@@ -1,14 +1,14 @@
 /*
-** EPITECH PROJECT, 2024
-** B-MUL-200-MPL-2-1-mypaint-pierrik.clary
+** EPITECH PROJECT, 2023
+** Elias josué HAJJAR LLAUQUEN
 ** File description:
-** window_save.c
+** project for epitech
 */
 
 #include <stdio.h>
 
 int main(void)
 {
-    printf("Hello World\n");
+    printf("Hello World Enzo !\n");
     return 0;
 }
