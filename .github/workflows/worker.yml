@@ -130,7 +130,7 @@ jobs:
 
   push_to_mirror:
     needs: [run_tests]
-    #if: ${{ needs.run_tests.result == 'success' }}
+    if: ${{ needs.run_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
