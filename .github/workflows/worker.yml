@@ -63,7 +63,7 @@ jobs:
         run: sudo apt-get install valgrind -y
       - name: Run Valgrind
         if: steps.check_project.outputs.cancel != 'true'
-        run: echo -e "ls" > valgrind --error-exitcode=1 --leak-check=full ./42sh
+        run: echo -e "ls" | valgrind --error-exitcode=1 --leak-check=full ./42sh
         timeout-minutes: 2
 
   check_program_compilation:
