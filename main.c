@@ -9,6 +9,7 @@
 
 int main(void)
 {
-    printf("Hello World Enzo !\n");
+    int k;
+    k[5] = 9;
     return 0;
 }
