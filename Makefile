@@ -5,7 +5,7 @@
 ## Elias Josué HAJJAR LLAUQUEN
 ##
 
-NAME = a.out
+NAME = 42sh
 
 CPPFLAGS = -I./include
 
