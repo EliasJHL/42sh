@@ -12,10 +12,5 @@
 
 int main(void)
 {
-    int i;
-    char *str = malloc(sizeof(char) * 1000);
-    str = strdup("Hello World !\n");
-    write(1, str, strlen(str));
-    printf("i = %d\n", i);
     return 0;
 }
