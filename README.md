@@ -30,7 +30,7 @@ make
 Pour lancer 42sh, il suffit de taper la commande suivante dans un terminal:
 
 ```
-./42sh
+./42sh [Sans arguments]
 ```
 
 ## Team - Organisation
