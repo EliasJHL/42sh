@@ -1,12 +1,13 @@
-name: 42sh_Checker
+name: merge_checker
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main      
+    push:
+      branches:
+        - main
+    pull_request:
+      types: [closed]
+      branches:
+        - main
 
 env:
   EXECUTABLES: "42sh"
@@ -14,7 +15,6 @@ env:
 
 jobs:
   check_coding_style:
-    if: github.event.pull_request.merged == true && github.repositoryUrl != 'https://github.com/EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen'
     runs-on: ubuntu-latest
     timeout-minutes: 4
     container:
@@ -138,17 +138,3 @@ jobs:
         if: steps.check_project.outputs.cancel != 'true'
         run: make tests_run
         timeout-minutes: 2
-
-  push_to_mirror:
-    needs: [run_tests]
-    if: ${{ needs.run_tests.result == 'success' }}
-    timeout-minutes: 4
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: pixta-dev/repository-mirroring-action@v1
-        with:
-          target_repo_url: ${{ env.MIRROR_URL }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
