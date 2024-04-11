@@ -43,7 +43,7 @@ Pour lancer 42sh, il suffit de taper la commande suivante dans un terminal:
 
 [brahimbenali](https://github.com/brahimbenali)
 
-[EnzoLC](https://github.com/enzolc)
+[EnzoLC](https://github.com/EnzoLobatoCoutinho)
 
 ## Licence
 
