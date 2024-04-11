@@ -5,9 +5,9 @@ on:
     branches:
       - main
   pull_request:
-    types: [closed]
+    types: [opened, synchronize]
     branches:
-      - main
+      - main      
 
 env:
   EXECUTABLES: "42sh"

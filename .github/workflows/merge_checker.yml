@@ -1,13 +1,13 @@
 name: merge_checker
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize]
-    branches:
-      - main
+    push:
+      branches:
+        - main
+    pull_request:
+      types: [closed]
+      branches:
+        - main
 
 env:
   EXECUTABLES: "42sh"
