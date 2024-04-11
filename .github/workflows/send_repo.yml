@@ -5,6 +5,7 @@ on:
     branches:
       - main
   pull_request:
+    types: [closed]
     branches:
       - main
 
@@ -14,8 +15,8 @@ env:
 
 jobs:
   check_coding_style:
+    if: github.event.pull_request.merged == true && github.repositoryUrl != 'https://github.com/EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen'
     runs-on: ubuntu-latest
-    if: github.repository != 'B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen.git'
     timeout-minutes: 4
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
