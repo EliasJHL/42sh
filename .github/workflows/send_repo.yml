@@ -14,7 +14,7 @@ env:
 
 jobs:
   Coding_style_checker:
-    if: github.event.pull_request.merged == true && github.repositoryUrl != 'https://github.com/EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen'
+    if: github.repositoryUrl != 'https://github.com/EpitechPromo2028/B-PSU-200-MPL-2-1-42sh-elias-josue.hajjar-llauquen'
     runs-on: ubuntu-latest
     timeout-minutes: 4
     container:
