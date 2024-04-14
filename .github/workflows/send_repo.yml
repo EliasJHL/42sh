@@ -1,4 +1,4 @@
-name: 42sh_Checker
+name: 42sh_Sender
 
 on:
   push:
