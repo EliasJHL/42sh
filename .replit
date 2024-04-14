@@ -1,0 +1,7 @@
+language = "c"
+onStart = "make && make clean"
+run = "./42sh"
+onStop = "pkill 42sh"
+[[hints]]
+regex = "exit status [84]"
+message = "Something was wrong, the program return an error !"  
