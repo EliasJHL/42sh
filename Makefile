@@ -9,7 +9,21 @@ NAME = 42sh
 
 CPPFLAGS = -I./include
 
-SRC = 	main.c
+#CFLAGS = -W -Wall -Wextra -Werror
+
+SRC =	src/mysh.c				\
+		src/separate_args.c		\
+		src/command.c			\
+		src/env.c				\
+		src/struct.c			\
+		lib/mini_printf.c		\
+		lib/my_strncpy.c		\
+		lib/my_strcmp.c			\
+		lib/my_strdup.c			\
+		lib/my_strncmp.c		\
+		lib/my_strskipcpy.c		\
+		lib/my_strcat.c			\
+		lib/alphanumeric.c
 
 OBJ = $(SRC:.c=.o)
 
