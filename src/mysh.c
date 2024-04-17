@@ -42,6 +42,7 @@ void init_env(char **env)
     char *vcontent;
 
     data()->env = NULL;
+    data()->alias = NULL;
     data()->nb_pipe = 0;
     while (env[i] != NULL){
         while (env[i][j] != '=' && env[i][j] != '\0')

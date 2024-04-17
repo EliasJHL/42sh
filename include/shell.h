@@ -22,14 +22,24 @@ typedef struct env_t {
     struct env_t *next;
 } env_t;
 
+typedef struct alias_t {
+    char *alias;
+    char **command;
+    int nb_command;
+    struct alias_t *next;
+} alias_t;
+
 typedef struct shell_s {
     char **array;
     char ***pipe;
     int nb_pipe;
     int nb_args;
     struct env_t *env;
+    struct alias_t *alias;
 } shell_t;
 
+void add_a(alias_t **alias, char *name);
+int aliases(void);
 void separate_pipe(void);
 void separate_command(char *arg);
 int mini_printf(const char *format, ...);

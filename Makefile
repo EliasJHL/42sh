@@ -16,6 +16,8 @@ SRC =	src/mysh.c				\
 		src/command.c			\
 		src/env.c				\
 		src/struct.c			\
+		src/aliases.c			\
+		src/struct_aliases.c	\
 		lib/mini_printf.c		\
 		lib/my_strncpy.c		\
 		lib/my_strcmp.c			\
