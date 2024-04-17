@@ -54,7 +54,7 @@ int disp_a(alias_t *alias)
     return 1;
 }
 
-void add_a(alias_t **alias, char *name)
+static void add_a(alias_t **alias, char *name)
 {
     alias_t *new = malloc(sizeof(alias_t));
     alias_t *current = *alias;
@@ -97,4 +97,26 @@ void adding_a(alias_t **alias, char *name)
         current->command[i] = my_strdup(data()->array[i + 2]);
     current->command[data()->nb_args - 1] = NULL;
     current->nb_command = data()->nb_args;
+}
+
+void remove_a(alias_t **alias, char *name)
+{
+    alias_t *current = *alias;
+    alias_t *previous = NULL;
+
+    while (current && my_strcmp(current->alias, name) != 0) {
+        previous = current;
+        current = current->next;
+    }
+    if (current == NULL)
+        return;
+    if (previous != NULL) {
+        previous->next = current->next;
+    } else
+        *alias = current->next;
+    free(current->alias);
+    for (int i = 0; current->command[i] != NULL; i++)
+        free(current->command[i]);
+    free(current->command);
+    free(current);
 }

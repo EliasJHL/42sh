@@ -51,6 +51,8 @@ static int verif_arg2(void)
         return disp(data()->env);
     if (my_strcmp(data()->array[0], "alias") == 0)
         return aliases();
+    if (my_strcmp(data()->array[0], "unalias") == 0)
+        return unalias();
     return 0;
 }
 
