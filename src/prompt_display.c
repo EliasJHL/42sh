@@ -39,8 +39,12 @@ display_t *stock_display(void)
 
 int command_line_display(display_t *display)
 {
-    char *pwd = getcwd(NULL, 0);
+    char *pwd = NULL;
 
+    if (strcmp(getcwd(NULL, 0), getenv("HOME")) == 0)
+        pwd = strdup("~");
+    else
+        pwd = getcwd(NULL, 0);  
     printf("%s@%s:%s$ ", display->logname, display->hostname, pwd);
     free(pwd);
     free(display->logname);
