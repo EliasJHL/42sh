@@ -7,38 +7,69 @@
 
 #include "include/shell.h"
 
-int comp(char buffer, char *delim, int i)
+typedef struct input_s {
+    char *seg;
+    struct input_s *next;
+} input_t;
+
+void addback_node(input_t *head, char *str)
 {
-    static int rest = 0;
-    if (buffer[i] == '\"')
-        return 0;
-    for (int l = 0; delim[l] != '\0'; l++) {
-        if (delim[l] == buffer[i])
+    input_t *new = malloc(sizeof(input_t));
+    input_t *cur = head;
+    
+    new->seg = strdup(str);
+    new->next = NULL;
+    if (cur == NULL) {
+        cur = new;
+    } else {
+        while (cur != NULL) {
+            cuir = cur->next;
+        }
+        cur = new;
+    }
+}
+
+static int check_inhibitor(char *str)
+{
+    int i = 0;
+    
+    while (str[i] != '\0') {
+        if (str[i] == '\"')
+            return 1;
+        if (str[i] == '\'')
+            return 1;
+        if (str[i] == '\\')
             return 1;
     }
     return 0;
 }
 
-int number_word(char *buffer)
+void inhibitor(input_t *head, int *nbword)
 {
-    char *delim = " \n\t";
-    int nb_compt = 0;
-    int i = 0;
+    input_t *cur = head;
 
-    while (buffer[i] != '\0') {
-        if (!comp(buffer[i], delim))
-            nb_compt++;
-        i++;
+    while (cur != NULL) {
+        if (check_inhibitor(cur->seg))
+
+        cur = cur->next;
     }
-    return nb_compt;
 }
+
 
 char **cut_arg(char *buffer)
 {
-    int nbword = number_word(buffer);
-    char **array = malloc((nbword + 1) * sizeof(char *));
-
-
+    char **array;
+    input_t *head = malloc(sizeof(input_t));
+    char *ptr;
+    char *token;
+    int nbword = 0;
+    
+    token = strtok_r(buffer, " \t\n", &ptr);
+    while (token != NULL) {
+        add(head, token);
+        nbword++;
+        token = strtok_r(buffer, " \t\n", &ptr);
+    }
 }
 
 int main(int ac, char **av)
