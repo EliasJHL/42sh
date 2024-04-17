@@ -30,6 +30,12 @@ typedef struct shell_s {
     struct env_t *env;
 } shell_t;
 
+typedef struct display_s {
+    char *logname;
+    char *hostname;
+    char *pwd;
+} display_t;
+
 void separate_pipe(void);
 void separate_command(char *arg);
 int mini_printf(const char *format, ...);
@@ -54,3 +60,5 @@ void clear(env_t *env);
 char **array_env(env_t *env);
 int is_number(char c);
 int is_letter(char c);
+display_t *stock_display(void);
+int command_line_display(display_t *display);
