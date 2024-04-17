@@ -9,12 +9,10 @@
 
 void clear_a(alias_t *alias)
 {
-    int i = 0;
     alias_t *current = alias;
     alias_t *next;
 
     while (current != NULL) {
-        mini_printf("%d\n", i++);
         next = current->next;
         free(current->alias);
         for (int i = 0; current->command[i] != NULL; i++)

@@ -53,6 +53,7 @@ static int verif_arg2(void)
         return aliases();
     if (my_strcmp(data()->array[0], "unalias") == 0)
         return unalias();
+    check_alias();
     return 0;
 }
 
