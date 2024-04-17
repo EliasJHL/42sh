@@ -7,16 +7,38 @@
 
 #include "include/shell.h"
 
+int comp(char buffer, char *delim, int i)
+{
+    static int rest = 0;
+    if (buffer[i] == '\"')
+        return 0;
+    for (int l = 0; delim[l] != '\0'; l++) {
+        if (delim[l] == buffer[i])
+            return 1;
+    }
+    return 0;
+}
+
 int number_word(char *buffer)
 {
     char *delim = " \n\t";
+    int nb_compt = 0;
+    int i = 0;
 
-
+    while (buffer[i] != '\0') {
+        if (!comp(buffer[i], delim))
+            nb_compt++;
+        i++;
+    }
+    return nb_compt;
 }
 
 char **cut_arg(char *buffer)
 {
     int nbword = number_word(buffer);
+    char **array = malloc((nbword + 1) * sizeof(char *));
+
+
 }
 
 int main(int ac, char **av)
