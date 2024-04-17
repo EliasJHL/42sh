@@ -57,6 +57,7 @@ static void free_func2(char *input)
 {
     free(input);
     clear(data()->env);
+    clear_a(data()->alias);
     free(data());
 }
 

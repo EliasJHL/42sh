@@ -7,6 +7,24 @@
 
 #include "shell.h"
 
+void clear_a(alias_t *alias)
+{
+    int i = 0;
+    alias_t *current = alias;
+    alias_t *next;
+
+    while (current != NULL) {
+        mini_printf("%d\n", i++);
+        next = current->next;
+        free(current->alias);
+        for (int i = 0; current->command[i] != NULL; i++)
+            free(current->command[i]);
+        free(current->command);
+        free(current);
+        current = next;
+    }
+}
+
 static void print_alias(alias_t *alias)
 {
     int i = 0;
@@ -60,7 +78,6 @@ void add_a(alias_t **alias, char *name)
 
 void adding_a(alias_t **alias, char *name)
 {
-    int i = 0;
     alias_t *current = *alias;
     alias_t *previous = NULL;
 
@@ -76,10 +93,8 @@ void adding_a(alias_t **alias, char *name)
         free(current->command[i]);
     free(current->command);
     current->command = malloc(sizeof(char *) * data()->nb_args);
-    while (i < data()->nb_args - 1){
+    for (int i = 0; i < data()->nb_args - 1; i++)
         current->command[i] = my_strdup(data()->array[i + 2]);
-        i++;
-    }
-    current->command[i] = NULL;
+    current->command[data()->nb_args - 1] = NULL;
     current->nb_command = data()->nb_args;
 }
