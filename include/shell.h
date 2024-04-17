@@ -38,7 +38,7 @@ typedef struct shell_s {
     struct alias_t *alias;
 } shell_t;
 
-void add_a(alias_t **alias, char *name);
+void adding_a(alias_t **alias, char *name);
 int aliases(void);
 void separate_pipe(void);
 void separate_command(char *arg);

@@ -28,3 +28,29 @@ void add_a(alias_t **alias, char *name)
         current->next = new;
     }
 }
+
+void adding_a(alias_t **alias, char *name)
+{
+    int i = 0;
+    alias_t *current = *alias;
+    alias_t *previous = NULL;
+
+    while (current && my_strcmp(current->alias, name) != 0) {
+        previous = current;
+        current = current->next;
+    }
+    if (current == NULL){
+        add_a(&data()->alias, name);
+        return;
+    }
+    for (int i = 0; current->command[i] != NULL; i++)
+        free(current->command[i]);
+    free(current->command);
+    current->command = malloc(sizeof(char *) * data()->nb_args);
+    while (i < data()->nb_args - 1){
+        current->command[i] = my_strdup(data()->array[i + 2]);
+        i++;
+    }
+    current->command[i] = NULL;
+    current->nb_command = data()->nb_args;
+}
