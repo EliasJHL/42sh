@@ -7,6 +7,35 @@
 
 #include "shell.h"
 
+static void print_alias(alias_t *alias)
+{
+    int i = 0;
+
+    if (alias->nb_command > 2){
+        mini_printf("(");
+        while (alias->command[i + 1] != NULL){
+            mini_printf("%s ", alias->command[i]);
+            i++;
+        }
+        mini_printf("%s", alias->command[i]);
+        mini_printf(")\n");
+    } else
+        mini_printf("%s\n", alias->command[0]);
+}
+
+int disp_a(alias_t *alias)
+{
+    while (alias) {
+        mini_printf("%s\t", alias->alias);
+        if (alias->command != NULL)
+            print_alias(alias);
+        else
+            mini_printf("\n");
+        alias = alias->next;
+    }
+    return 1;
+}
+
 void add_a(alias_t **alias, char *name)
 {
     alias_t *new = malloc(sizeof(alias_t));
