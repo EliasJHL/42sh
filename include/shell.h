@@ -33,7 +33,6 @@ typedef struct shell_s {
 typedef struct display_s {
     char *logname;
     char *hostname;
-    char *pwd;
 } display_t;
 
 void separate_pipe(void);

@@ -67,6 +67,7 @@ int mysh(char **env)
 
     while (1) {
         command_line_display(stock_display());
+        //printf("$> ");
         verif = getline(&input, &len, stdin);
         if (verif == -1){
             mini_printf("exit\n");
@@ -111,10 +112,9 @@ static void free_copy(char **copy)
 int main(int ac, char **av, char **env)
 {
     char *input = NULL;
-    char **copy = env_copy(env);
     size_t len = 0;
 
-    init_env(copy);
+    init_env(env);
     if (isatty(STDIN_FILENO))
         return mysh(env);
     while (getline(&input, &len, stdin) != -1) {
@@ -124,6 +124,5 @@ int main(int ac, char **av, char **env)
         }
     }
     free_func2(input);
-    free_copy(copy);
     return 0;
 }
