@@ -41,7 +41,7 @@ Pour lancer 42sh, il suffit de taper la commande suivante dans un terminal:
 
 [Sawayuuh](https://github.com/Sawayuuh)
 
-[brahimbenali](https://github.com/brahimbenali)
+[brahimbenali le khra](https://github.com/brahimbenali)
 
 [EnzoLC](https://github.com/EnzoLobatoCoutinho)
 
