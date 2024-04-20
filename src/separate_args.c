@@ -100,5 +100,5 @@ void separate_arg(char *arg)
         token = strtok_r(NULL, " \t\n", &ptr);
         i++;
     }
-    data()->array[i] = NULL;
+    data()->array[i] = NULL; 
 }

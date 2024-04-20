@@ -13,8 +13,15 @@
 #include <sys/wait.h>
 #include <dirent.h>
 #include <errno.h>
+
 #define COMPARR(a, b) my_strcmp(data()->array[a], b)
+
 #pragma once
+
+typedef struct input_s {
+    char *seg;
+    struct input_s *next;
+} input_t;
 
 typedef struct env_t {
     char *vname;
@@ -54,3 +61,6 @@ void clear(env_t *env);
 char **array_env(env_t *env);
 int is_number(char c);
 int is_letter(char c);
+void addback_input(input_t **head, char *str);
+void del_all(input_t *head);
+void add_middel(input_t **head, char *str);

@@ -23,7 +23,8 @@ SRC =	src/mysh.c				\
 		lib/my_strncmp.c		\
 		lib/my_strskipcpy.c		\
 		lib/my_strcat.c			\
-		lib/alphanumeric.c
+		lib/alphanumeric.c		\
+		lib/list_chaine.c
 
 OBJ = $(SRC:.c=.o)
 
