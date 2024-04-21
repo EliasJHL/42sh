@@ -44,6 +44,8 @@ void delteindex_input(input_t **head, char *index)
     input_t *del = NULL;
     input_t *prev = NULL;
 
+    if (index == NULL)
+        return;
     for (; cur != NULL; cur = cur->next) {
         if (my_strcmp(cur->seg, index) == 0)
             break;

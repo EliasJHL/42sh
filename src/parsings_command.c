@@ -9,6 +9,8 @@
 
 int what_is_separator(char *str)
 {
+    if (str == NULL)
+        return 0;
     if (my_strcmp(str, ";") == 0)
         return 1;
     if (my_strcmp(str, "&&") == 0)
@@ -48,16 +50,37 @@ char **command_to_exec(void)
 
     while (cur != NULL) {
         if (what_is_separator(cur->seg) != 0) {
-
-        } else {
-            array[c] = my_strdup(cur->seg);
+            break;
         }
+        array[c] = my_strdup(cur->seg);
+        c++;
         cur = cur->next;
     }
+    array[c] = NULL;
+    return array;
+}
+
+char **create_array(char *str)
+{
+    char **array = malloc(sizeof(char *) * 2);
+
+    array[0] = my_strdup(str);
+    array[1] = NULL;
+    return array;
 }
 
 void parsing_command(void)
 {
-    data()->command = NULL
-    
+    data()->command = NULL;
+    while (data()->input != NULL) {
+        addback_command(&data()->command, command_to_exec());
+        for (int i = 0; i < len_command(data()->input); i++)
+            delteindex_input(&data()->input, data()->input->seg);
+        if (what_is_separator(data()->input->seg) > 2) {
+            addback_command(&data()->command, create_array(data()->input->seg));
+            delteindex_input(&data()->input, data()->input->seg);
+        } else {
+
+        }
+    }
 }
