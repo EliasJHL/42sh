@@ -18,6 +18,11 @@
 
 #pragma once
 
+typedef struct list_commad_s {
+    char **command_a;
+    struct list_commad_s *next;
+} list_command_t;
+
 typedef struct input_s {
     char *seg;
     struct input_s *next;
@@ -34,6 +39,8 @@ typedef struct shell_s {
     char ***pipe;
     int nb_pipe;
     int nb_args;
+    struct list_commad_s *command;
+    struct input_s *input;
     struct env_t *env;
 } shell_t;
 
@@ -61,6 +68,14 @@ void clear(env_t *env);
 char **array_env(env_t *env);
 int is_number(char c);
 int is_letter(char c);
+int parsing(char *buffer);
+char **my_copy_array(char **array);
+void my_freearray(char **array);
+int my_arraycmp(char **array1, char **array2);
+
+/* list_input */
 void addback_input(input_t **head, char *str);
-void del_all(input_t *head);
-void add_middel(input_t **head, char *str);
+void delall_input(input_t *head);
+void print_list_input(input_t *head)
+void delteindex_input(input_t **head, char *index);
+/* list_input */

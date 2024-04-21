@@ -1,56 +1,63 @@
 /*
 ** EPITECH PROJECT, 2024
-** team_42sh
+** 42sh_team
 ** File description:
-** parsings
+** parsings_command
 */
 
 #include "shell.h"
 
-static int check_parsing(char *buffer)
+int what_is_separator(char *str)
 {
-    int i = 0;
-    while (buffer[i] != '\0') {
-        if (buffer[i] == ';' && my_strlen(buffer) > 1)
-            return 1;
-    }
+    if (my_strcmp(str, ";") == 0)
+        return 1;
+    if (my_strcmp(str, "&&") == 0)
+        return 2;
+    if (my_strcmp(str, "|") == 0)
+        return 3;
+    if (my_strcmp(str, ">>") == 0)
+        return 4;
+    if (my_strcmp(str, ">") == 0)
+        return 5;
+    if (my_strcmp(str, "<<") == 0)
+        return 6;
+    if (my_strcmp(str, "<") == 0)
+        return 7;
     return 0;
 }
 
-static void cut_pawn(input_t *head)
+int len_command(input_t *head)
 {
     input_t *cur = head;
-    char *token;
-    char *ptr;
-
-    token = strtok_r(NULL, ";", &ptr);
-    while (token != NULL) {
-        add_middel(, token);
-        token = strtok_r(NULL, ";", &ptr);
-    }
-}
-
-void parsing_pawn(input_t *head)
-{
-    input_t *cur = head;
+    int i = 0;
 
     while (cur != NULL) {
-        if (check_parsing(cur->seg) == 1)
-            cut_pawn(cur);
-       cur = cur->next;
+        if (what_is_separator(cur->seg) != 0)
+            return i;
+        i++;
+        cur = cur->next;
+    }
+    return i;
+}
+
+char **command_to_exec(void)
+{
+    input_t *cur = data()->input;
+    char **array = malloc(sizeof(char *) * (len_command(data()->input) + 1));
+    int c = 0;
+
+    while (cur != NULL) {
+        if (what_is_separator(cur->seg) != 0) {
+
+        } else {
+            array[c] = my_strdup(cur->seg);
+        }
+        cur = cur->next;
     }
 }
 
-int parsing(char *buffer)
+void parsing_command(void)
 {
-    input_t *head = NULL;
-    char *ptr;
-    char *token;
-
-    token = strtok_r(buffer, " \t\n", &ptr);
-    while (token != NULL) {
-        addback_node(&head, token);
-        token = strtok_r(NULL, " \t\n", &ptr);
-    }
-    return 0;
+    data()->command = NULL
+    
 }

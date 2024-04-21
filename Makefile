@@ -11,6 +11,8 @@ CPPFLAGS = -I./include
 
 #CFLAGS = -W -Wall -Wextra -Werror
 
+CFLAGS = -g3
+
 SRC =	src/mysh.c				\
 		src/separate_args.c		\
 		src/command.c			\
@@ -24,7 +26,8 @@ SRC =	src/mysh.c				\
 		lib/my_strskipcpy.c		\
 		lib/my_strcat.c			\
 		lib/alphanumeric.c		\
-		lib/list_chaine.c
+		lib/list_chaine_input.c		\
+		src/parsings_seperator.c
 
 OBJ = $(SRC:.c=.o)
 

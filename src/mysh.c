@@ -77,7 +77,8 @@ int mysh(char **env)
         if (my_strcmp(input, "exit\0") == 0)
             break;
         if (verif != 1)
-            separate_command(input);
+            parsing(input);
+            //separate_command(input);
     }
     free_func2(input);
     return 0;

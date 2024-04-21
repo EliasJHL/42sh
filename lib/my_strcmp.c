@@ -5,6 +5,8 @@
 ** Strcmp
 */
 
+#include <stdio.h>
+
 int my_strcmp(char const *s1, char const *s2)
 {
     int i = 0;
