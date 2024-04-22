@@ -72,11 +72,12 @@ int parsing(char *buffer);
 char **my_copy_array(char **array);
 void my_freearray(char **array);
 int my_arraycmp(char **array1, char **array2);
+void parsing_command(void);
 
 /* list_input */
 void addback_input(input_t **head, char *str);
 void delall_input(input_t *head);
-void print_list_input(input_t *head)
+void print_list_input(input_t *head);
 void delteindex_input(input_t **head, char *index);
 /* list_input */
 
@@ -84,4 +85,6 @@ void delteindex_input(input_t **head, char *index);
 void addback_command(list_command_t **head, char **array);
 void delall_commmand(list_command_t *head);
 void delteindex_command(list_command_t **head, char **index);
+void print_list_command(list_command_t *head);
+/* list_command */
 

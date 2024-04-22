@@ -26,8 +26,13 @@ SRC =	src/mysh.c				\
 		lib/my_strskipcpy.c		\
 		lib/my_strcat.c			\
 		lib/alphanumeric.c		\
-		lib/list_chaine_input.c		\
-		src/parsings_seperator.c
+		lib/list_chaine_input.c	\
+		src/parsings_seperator.c\
+		src/parsings_command.c	\
+		lib/list_chaine_command.c\
+		lib/my_copyarray.c		\
+		lib/my_freearray.c		\
+		lib/my_arraycmp.c		\
 
 OBJ = $(SRC:.c=.o)
 

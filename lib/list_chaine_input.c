@@ -46,11 +46,8 @@ void delteindex_input(input_t **head, char *index)
 
     if (index == NULL)
         return;
-    for (; cur != NULL; cur = cur->next) {
-        if (my_strcmp(cur->seg, index) == 0)
-            break;
+    for (; cur != NULL && my_strcmp(cur->seg, index) != 0; cur = cur->next)
         prev = cur;
-    }
     del = cur;
     if (prev != NULL) {
         prev->next = cur->next;

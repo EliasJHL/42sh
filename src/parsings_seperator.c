@@ -15,7 +15,7 @@ static int check_parsing(char *buffer, char *delim)
     if (buffer == NULL)
         return 0;
     while (buffer[i] != '\0') {
-        if (buffer[i] == c && my_strlen(buffer) > 1)
+        if (buffer[i] == delim[d] && my_strlen(buffer) > 1)
             return 1;
         if (buffer[i + 1] == '\0' && delim[d] != '\0') {
             i = 0;
@@ -59,8 +59,7 @@ int parsing(char *buffer)
             addback_input(&data()->input, token);
         token = strtok_r(NULL, " \t\n", &ptr);
     }
-    print_list_input(data()->input);
-    del_all(data()->input);
-    //print_list_input(data()->head);
+    parsing_command();
+    delall_input(data()->input);
     return 0;
 }

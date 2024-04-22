@@ -57,3 +57,24 @@ void delteindex_command(list_command_t **head, char **index)
     my_freearray(del->command_a);
     free(del);
 }
+
+
+
+void print_list_command(list_command_t *head)
+{
+    list_command_t *cur = head;
+
+    if (head == NULL) {
+
+        return;
+    }
+    while (cur != NULL) {
+        for (int i = 0; cur->command_a[i] != NULL; i++) {
+            mini_printf("%s", cur->command_a[i]);
+            if (cur->command_a[i + 1] != NULL)
+                printf(" ");
+        }
+        cur = cur->next;
+    }
+    printf("\n");
+}
