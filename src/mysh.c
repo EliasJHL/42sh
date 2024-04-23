@@ -69,7 +69,6 @@ int mysh(char **env)
         mini_printf("$> ");
         verif = getline(&input, &len, stdin);
         if (verif == -1){
-            mini_printf("exit\n");
             free_func2(input);
             return 0;
         }
@@ -78,7 +77,6 @@ int mysh(char **env)
             break;
         if (verif != 1)
             parsing(input);
-            //separate_command(input);
     }
     free_func2(input);
     return 0;

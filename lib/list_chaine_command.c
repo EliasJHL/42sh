@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** team_42sh
+** 42sh
 ** File description:
-** list_chaine
+** list_chaine_command.c
 */
 
 #include "shell.h"
@@ -13,6 +13,7 @@ void addback_command(list_command_t **head, char **array)
     list_command_t *cur = *head;
 
     new->command_a = my_copy_array(array);
+    my_freearray(array);
     new->next = NULL;
     if (*head == NULL) {
         *head = new;
@@ -58,23 +59,27 @@ void delteindex_command(list_command_t **head, char **index)
     free(del);
 }
 
-
+static void print_command(char **array)
+{
+    for (int i = 0; array[i] != NULL; i++) {
+        printf("%s", array[i]);
+        if (array[i + 1] != NULL)
+            printf(" ");
+    }
+}
 
 void print_list_command(list_command_t *head)
 {
     list_command_t *cur = head;
+    int i = 0;
 
-    if (head == NULL) {
-
+    if (head == NULL){
         return;
     }
-    while (cur != NULL) {
-        for (int i = 0; cur->command_a[i] != NULL; i++) {
-            mini_printf("%s", cur->command_a[i]);
-            if (cur->command_a[i + 1] != NULL)
-                printf(" ");
-        }
-        cur = cur->next;
+    for (; cur != NULL; cur = cur->next) {
+        print_command(cur->command_a);
+        if (cur->next != NULL)
+            printf(" ");
     }
     printf("\n");
 }

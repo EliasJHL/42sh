@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** 42sh_team
+** 42sh
 ** File description:
-** my_arraycmp
+** my_arraycmp.c
 */
 
 #include "shell.h"
@@ -17,7 +17,7 @@ int my_arraycmp(char **array1, char **array2)
         if (my_strcmp(array1[i], array2[i]) != 0)
             return 1;
     }
-    if (array1[i] != NULL || array2[i] != NULL)
+    if (array1[i] != NULL && array2[i] != NULL)
         return 1;
     return 0;
 }

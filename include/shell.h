@@ -87,4 +87,3 @@ void delall_commmand(list_command_t *head);
 void delteindex_command(list_command_t **head, char **index);
 void print_list_command(list_command_t *head);
 /* list_command */
-

@@ -1,0 +1,11 @@
+./src/parsings_command.c:29: MINOR:C-L4
+./src/parsings_command.c:43: MINOR:C-L4
+./src/parsings_command.c:52: MINOR:C-L4
+./src/parsings_command.c:72: MINOR:C-L4
+./src/parsings_command.c:81: MINOR:C-L4
+./src/parsings_command.c:96: MINOR:C-L4
+./src/parsings_command.c:104: MINOR:C-L4
+./src/parsings_command.c:122: MINOR:C-L4
+./src/parsings_seperator.c:27: MINOR:C-L4
+./src/parsings_seperator.c:46: MINOR:C-L4
+./src/parsings_seperator.c:65: MINOR:C-L4

@@ -7,23 +7,23 @@
 
 #include "shell.h"
 
-int what_is_separator(char *str)
+int what_is_separator(input_t *head)
 {
-    if (str == NULL)
+    if (head == NULL)
         return 0;
-    if (my_strcmp(str, ";") == 0)
+    if (my_strcmp(head->seg, ";") == 0)
         return 1;
-    if (my_strcmp(str, "&&") == 0)
+    if (my_strcmp(head->seg, "&&") == 0)
         return 2;
-    if (my_strcmp(str, "|") == 0)
+    if (my_strcmp(head->seg, "|") == 0)
         return 3;
-    if (my_strcmp(str, ">>") == 0)
+    if (my_strcmp(head->seg, ">>") == 0)
         return 4;
-    if (my_strcmp(str, ">") == 0)
+    if (my_strcmp(head->seg, ">") == 0)
         return 5;
-    if (my_strcmp(str, "<<") == 0)
+    if (my_strcmp(head->seg, "<<") == 0)
         return 6;
-    if (my_strcmp(str, "<") == 0)
+    if (my_strcmp(head->seg, "<") == 0)
         return 7;
     return -1;
 }
@@ -34,12 +34,21 @@ static int len_command(input_t *head)
     int i = 0;
 
     while (cur != NULL) {
-        if (what_is_separator(cur->seg) > 0)
+        if (what_is_separator(cur) > 0)
             return i;
         i++;
         cur = cur->next;
     }
     return i;
+}
+
+static void delte_command(void)
+{
+    list_command_t *cur = data()->command;
+
+    for (; cur->next != NULL; cur = cur->next);
+    for (int i = 0; cur->command_a[i] != NULL; i++)
+        delteindex_input(&data()->input, cur->command_a[i]);
 }
 
 static char **command_to_exec(void)
@@ -50,22 +59,15 @@ static char **command_to_exec(void)
     char **array = malloc(sizeof(char *) * (len + 1));
     int c = 0;
 
-    for (input_t *cur = data()->input; cur != NULL; cur = cur->next) {
-        printf("seg %s arg: %d\n", cur->seg, nb++);
-    }
-    printf("command to exec\nlen: %d\n", len);
     while (cur != NULL) {
-        if (what_is_separator(cur->seg) != 0) {
+        if (what_is_separator(cur) > 0) {
             break;
         }
-        printf("seg %s\n", cur->seg);
         array[c] = my_strdup(cur->seg);
         c++;
         cur = cur->next;
     }
     array[c] = NULL;
-    for (int i = 0; array[i] != NULL; i++)
-        printf("array: %s\n", array[i]);
     return array;
 }
 
@@ -80,9 +82,11 @@ static char **create_array(char *str)
 
 int command_par(void)
 {
-    int seperator = what_is_separator(data()->input->seg);
+    int seperator = 0;
 
-    printf("command par %s seperator %d \n", data()->input->seg, seperator);
+    if (data()->input == NULL)
+        return 1;
+    seperator = what_is_separator(data()->input);
     if (seperator > 2) {
         addback_command(&data()->command, create_array(data()->input->seg));
         delteindex_input(&data()->input, data()->input->seg);
@@ -99,29 +103,20 @@ void what_exevcute(int seperator)
         delteindex_input(&data()->input, "&&");
 }
 
-void delte_command(void)
-{
-    list_command_t *cur = data()->command;
-
-    for (; cur->next != NULL; cur = cur->next);
-    for (int i = 0; cur->command_a[i] != NULL; i++)
-        delteindex_input(&data()->input, cur->command_a[i]);
-}
-
 void parsing_command(void)
 {
-    ///int nb = 0;
     data()->command = NULL;
-    //while (data()->input != NULL) {
-    for (int i = 0; i != 1; i++) {
+    while (data()->input != NULL) {
         addback_command(&data()->command, command_to_exec());
-        print_list_command(data()->command);
         delte_command();
         if (command_par() == 1) {
-            printf("command_par\n");
             print_list_command(data()->command);
-            what_exevcute(what_is_separator(data()->input->seg));
+            what_exevcute(what_is_separator(data()->input));
             delall_commmand(data()->command);
+            data()->command = NULL;
         }
     }
+    if (data()->command != NULL)
+        delall_commmand(data()->command);
+    data()->command = NULL;
 }

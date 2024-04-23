@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** 42sh_team
+** 42sh
 ** File description:
-** my_freearray
+** my_freearray.c
 */
 
 #include "shell.h"

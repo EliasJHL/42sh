@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** team_42sh
+** 42sh
 ** File description:
-** list_chaine
+** list_chaine_input.c
 */
 
 #include "shell.h"
@@ -61,12 +61,10 @@ void print_list_input(input_t *head)
 {
     input_t *cur = head;
 
-    if (head == NULL){
-        printf("NULL\n");
-        return;
+    for (; cur != NULL; cur = cur->next) {
+        printf("%s", cur->seg);
+        if (cur->next != NULL)
+            printf(" ");
     }
-    while (cur != NULL) {
-        printf("%s\n", cur->seg);
-        cur = cur->next;
-    }
+    printf("\n");
 }
