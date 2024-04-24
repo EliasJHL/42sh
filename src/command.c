@@ -12,7 +12,7 @@ static int my_cd2(void)
     char cwd[1024];
 
     if (data()->nb_args == 1){
-        if (chdir(data()->array[1]) == -1){
+        if (chdir(data()->array[1]) == -1) {
             mini_printf("%s: %s.\n", data()->array[1], strerror(errno));
         } else {
             my_setenv(&data()->env, "OLDPWD", my_getenv(data()->env, "PWD"));
@@ -26,17 +26,17 @@ int my_cd(void)
 {
     char cwd[1024];
 
-    if (data()->nb_args > 1){
+    if (data()->nb_args > 1) {
         mini_printf("cd: too many arguments\n");
         return 1;
     }
-    if (data()->nb_args == 0){
+    if (data()->nb_args == 0) {
         my_setenv(&data()->env, "OLDPWD", my_getenv(data()->env, "PWD"));
         chdir(my_getenv(data()->env, "HOME"));
         my_setenv(&data()->env, "PWD", my_getenv(data()->env, "HOME"));
         return 1;
     }
-    if (my_strcmp(data()->array[1], "-") == 0){
+    if (my_strcmp(data()->array[1], "-") == 0) {
         chdir(my_getenv(data()->env, "OLDPWD"));
         my_setenv(&data()->env, "OLDPWD", my_getenv(data()->env, "PWD"));
         my_setenv(&data()->env, "PWD", getcwd(cwd, sizeof(cwd)));
@@ -72,7 +72,7 @@ int verif_arg(void)
             my_unsetenv(&data()->env, data()->array[i]);
         return 1;
     }
-    return verif_arg2();
+    return verif_arg2();input[0] = my_strdup(
 }
 
 static void print_error(int error, char *command)
@@ -157,6 +157,6 @@ void command(char *input)
         return;
     } else
         mini_printf("%s: Command not found.\n", save);
-        free(save);
-        free_func(env, 1);
+    free(save);
+    free_func(env, 1);
 }

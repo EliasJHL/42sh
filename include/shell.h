@@ -51,7 +51,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 int my_strcmp(char const *s1, char const *s2);
 shell_t *data(void);
 int my_strlen(char const *str);
-void command(char *input);
+int command(void);
 void separate_arg(char *arg);
 void free_func(char **array, int nb);
 char *my_strdup(char *str);
@@ -73,6 +73,8 @@ char **my_copy_array(char **array);
 void my_freearray(char **array);
 int my_arraycmp(char **array1, char **array2);
 void parsing_command(void);
+int my_arraylen(char **array);
+int my_cd(void);
 
 /* list_input */
 void addback_input(input_t **head, char *str);

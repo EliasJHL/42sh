@@ -97,10 +97,19 @@ int command_par(void)
 
 void what_exevcute(int seperator)
 {
-    if (seperator == 1)
-        delteindex_input(&data()->input, ";");
-    if (seperator == 2)
+    if (seperator == 1 || seperator == 0) {
+        command();
+        if (seperator == 1)
+            delteindex_input(&data()->input, ";");
+    }
+    if (seperator == 2) {
+        if (command() == 0) {
+            delall_input(data()->input);
+            delall_commmand(data()->command);
+            data()->command = NULL;
+        }
         delteindex_input(&data()->input, "&&");
+    }
 }
 
 void parsing_command(void)

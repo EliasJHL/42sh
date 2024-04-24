@@ -14,8 +14,6 @@ CPPFLAGS = -I./include
 CFLAGS = -g3
 
 SRC =	src/mysh.c				\
-		src/separate_args.c		\
-		src/command.c			\
 		src/env.c				\
 		src/struct.c			\
 		lib/mini_printf.c		\
@@ -33,6 +31,9 @@ SRC =	src/mysh.c				\
 		lib/my_copyarray.c		\
 		lib/my_freearray.c		\
 		lib/my_arraycmp.c		\
+		src/execv_command.c		\
+		lib/my_arraylen.c		\
+		src/cd.c				\
 
 OBJ = $(SRC:.c=.o)
 

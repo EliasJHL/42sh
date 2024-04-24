@@ -53,8 +53,10 @@ void delteindex_input(input_t **head, char *index)
         prev->next = cur->next;
     } else
         *head = cur->next;
-    free(del->seg);
-    free(del);
+    if (my_strcmp(del->seg, index) == 0) {
+        free(del->seg);
+        free(del);
+    }
 }
 
 void print_list_input(input_t *head)

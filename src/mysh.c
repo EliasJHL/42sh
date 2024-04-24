@@ -90,12 +90,12 @@ int main(int ac, char **av, char **env)
     init_env(env);
     if (isatty(STDIN_FILENO))
         return mysh(env);
-    while (getline(&input, &len, stdin) != -1){
-        if (input[0] != '\n'){
-            input[my_strlen(input) - 1] = '\0';
-            separate_command(input);
-        }
-    }
+    //while (getline(&input, &len, stdin) != -1){
+    //    if (input[0] != '\n'){
+    //        input[my_strlen(input) - 1] = '\0';
+    //        separate_command(input);
+    //    }
+    //}
     free_func2(input);
     return 0;
 }
