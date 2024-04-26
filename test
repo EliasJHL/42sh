@@ -1,0 +1,12 @@
+a.out
+coding-style-reports.log
+coding-style.sh
+include
+lib
+LICENSE
+main.c
+Makefile
+README.md
+src
+test
+test_main

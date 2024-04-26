@@ -13,6 +13,8 @@
 #include <sys/wait.h>
 #include <dirent.h>
 #include <errno.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define COMPARR(a, b) my_strcmp(data()->array[a], b)
 
