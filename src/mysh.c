@@ -73,7 +73,8 @@ int mysh(char **env, history_t *history)
     int verif;
 
     while (1) {
-        mini_printf("$> ");
+        command_line_display(stock_display());
+        //printf("$> ");
         verif = getline(&input, &len, stdin);
         if (verif == -1){
             return print_exit(input);
@@ -87,6 +88,31 @@ int mysh(char **env, history_t *history)
     }
     free_func2(input);
     return 0;
+}
+
+static char **env_copy(char **env)
+{
+    char **new_env = NULL;
+    int i = 0;
+
+    while (env[i] != NULL)
+        i++;
+    new_env = malloc(sizeof(char *) * (i + 1));
+    for (int j = 0; j < i; j++)
+        new_env[j] = strdup(env[j]);
+    new_env[i] = NULL;
+    return new_env;
+}
+
+static void free_copy(char **copy)
+{
+    int i = 0;
+
+    while (copy[i] != NULL) {
+        free(copy[i]);
+        i++;
+    }
+    free(copy);
 }
 
 int main(int ac, char **av, char **env)

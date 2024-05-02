@@ -38,6 +38,11 @@ typedef struct shell_s {
     struct env_t *env;
 } shell_t;
 
+typedef struct display_s {
+    char *logname;
+    char *hostname;
+} display_t;
+
 void separate_pipe(void);
 void separate_command(char *arg, history_t *history);
 int mini_printf(const char *format, ...);
@@ -64,6 +69,8 @@ void clear(env_t *env);
 char **array_env(env_t *env);
 int is_number(char c);
 int is_letter(char c);
+display_t *stock_display(void);
+int command_line_display(display_t *display);
 void print_history(history_t *history);
 int add_history(history_t **history, char *command);
 void print_commands_from(history_t *start, int nbr);
