@@ -137,10 +137,25 @@ int search_path(void)
     return 0;
 }
 
-void command(char *input)
+void execute_command_if_exists(char *command, char **env)
+{
+    char *save = my_strdup(command);
+
+    if (access(command, F_OK) == 0 || search_path()){
+        execute_command(env, save);
+        free_func(env, 0);
+        free(save);
+        return;
+    } else {
+        mini_printf("%s: Command not found.\n", save);
+        free(save);
+        free_func(env, 1);
+    }
+}
+
+void command(char *input, history_t *history)
 {
     char **env;
-    char *save;
 
     separate_arg(input);
     separate_pipe();
@@ -148,15 +163,9 @@ void command(char *input)
         free_func(env, 1);
         return;
     }
-    save = my_strdup(data()->array[0]);
-    if (access(data()->array[0], F_OK) == 0 || search_path()){
-        env = array_env(data()->env);
-        execute_command(env, save);
-        free_func(env, 0);
-        free(save);
+    if (handle_specific_commands(input, history) == 0) {
         return;
-    } else
-        mini_printf("%s: Command not found.\n", save);
-        free(save);
-        free_func(env, 1);
+    }
+    env = array_env(data()->env);
+    execute_command_if_exists(data()->array[0], env);
 }
