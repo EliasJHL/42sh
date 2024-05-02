@@ -74,7 +74,6 @@ int mysh(char **env, history_t *history)
 
     while (1) {
         command_line_display(stock_display());
-        //printf("$> ");
         verif = getline(&input, &len, stdin);
         if (verif == -1){
             return print_exit(input);
