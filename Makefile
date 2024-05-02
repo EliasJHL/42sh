@@ -16,6 +16,9 @@ SRC =	src/mysh.c				\
 		src/command.c			\
 		src/env.c				\
 		src/struct.c			\
+		src/history.c			\
+		src/history_handle.c	\
+		src/globbing.c			\
 		lib/mini_printf.c		\
 		lib/my_strncpy.c		\
 		lib/my_strcmp.c			\
@@ -23,7 +26,8 @@ SRC =	src/mysh.c				\
 		lib/my_strncmp.c		\
 		lib/my_strskipcpy.c		\
 		lib/my_strcat.c			\
-		lib/alphanumeric.c
+		lib/alphanumeric.c		\
+		lib/my_getnbr.c
 
 OBJ = $(SRC:.c=.o)
 
