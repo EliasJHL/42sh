@@ -59,7 +59,14 @@ static void free_func2(char *input)
     free(data());
 }
 
-int mysh(char **env)
+static int print_exit(char *input)
+{
+    mini_printf("exit\n");
+    free_func2(input);
+    return 0;
+}
+
+int mysh(char **env, history_t *history)
 {
     char *input = NULL;
     size_t len = 0;
@@ -70,15 +77,14 @@ int mysh(char **env)
         //printf("$> ");
         verif = getline(&input, &len, stdin);
         if (verif == -1){
-            mini_printf("exit\n");
-            free_func2(input);
-            return 0;
+            return print_exit(input);
         }
         input[my_strlen(input) - 1] = '\0';
+        add_history(&history, input);
         if (my_strcmp(input, "exit\0") == 0)
             break;
         if (verif != 1)
-            separate_command(input);
+            separate_command(input, history);
     }
     free_func2(input);
     return 0;
@@ -113,14 +119,15 @@ int main(int ac, char **av, char **env)
 {
     char *input = NULL;
     size_t len = 0;
+    history_t *history = NULL;
 
     init_env(env);
     if (isatty(STDIN_FILENO))
-        return mysh(env);
-    while (getline(&input, &len, stdin) != -1) {
+        return mysh(env, history);
+    while (getline(&input, &len, stdin) != -1){
         if (input[0] != '\n'){
             input[my_strlen(input) - 1] = '\0';
-            separate_command(input);
+            separate_command(input, history);
         }
     }
     free_func2(input);

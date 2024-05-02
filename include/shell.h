@@ -5,6 +5,7 @@
 ** shell
 */
 
+#include <glob.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,6 +14,7 @@
 #include <sys/wait.h>
 #include <dirent.h>
 #include <errno.h>
+#include <time.h>
 #define COMPARR(a, b) my_strcmp(data()->array[a], b)
 #pragma once
 
@@ -21,6 +23,12 @@ typedef struct env_t {
     char *vcontent;
     struct env_t *next;
 } env_t;
+
+typedef struct history_s {
+    char *command;
+    time_t time;
+    struct history_s *next;
+} history_t;
 
 typedef struct shell_s {
     char **array;
@@ -36,13 +44,15 @@ typedef struct display_s {
 } display_t;
 
 void separate_pipe(void);
-void separate_command(char *arg);
+void separate_command(char *arg, history_t *history);
 int mini_printf(const char *format, ...);
 char *my_strncpy(char *dest, char const *src, int n);
 int my_strcmp(char const *s1, char const *s2);
 shell_t *data(void);
 int my_strlen(char const *str);
-void command(char *input);
+void execute_command_if_exists(char *command, char **env);
+void command(char *input, history_t *history);
+void handle_history_command(history_t *history, char *arg);
 void separate_arg(char *arg);
 void free_func(char **array, int nb);
 char *my_strdup(char *str);
@@ -61,3 +71,16 @@ int is_number(char c);
 int is_letter(char c);
 display_t *stock_display(void);
 int command_line_display(display_t *display);
+void print_history(history_t *history);
+int add_history(history_t **history, char *command);
+void print_commands_from(history_t *start, int nbr);
+void print_history2(history_t *history, int nbr);
+history_t *get_command_by_number(history_t *history, int nbr);
+void execute_last_command(history_t *history);
+void handle_history_command(history_t *history, char *arg);
+void execute_command_by_number(char *input, history_t *history);
+void execute_history_command(char *input, history_t *history);
+int check_etoile(char *str);
+void globbing_part1(char *str);
+int my_getnbr(char const *str);
+int handle_specific_commands(char *input, history_t *history);

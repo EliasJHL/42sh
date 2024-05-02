@@ -68,13 +68,13 @@ void separate_pipe(void)
     remove_pipe();
 }
 
-void separate_command(char *arg)
+void separate_command(char *arg, history_t *history)
 {
     char *ptr;
     char *token = strtok_r(arg, ";", &ptr);
 
     while (token != NULL) {
-        command(token);
+        command(token, history);
         token = strtok_r(NULL, ";", &ptr);
     }
 }
