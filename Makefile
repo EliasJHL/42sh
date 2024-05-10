@@ -16,6 +16,11 @@ SRC =	src/mysh.c				\
 		src/command.c			\
 		src/env.c				\
 		src/struct.c			\
+		src/priority.c			\
+		src/execute.c			\
+		src/execute2.c			\
+		src/execute3.c			\
+		src/execute4.c			\
 		src/prompt_display.c	\
 		src/history.c			\
 		src/history_handle.c	\
