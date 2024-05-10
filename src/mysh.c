@@ -21,12 +21,6 @@ void free_func(char **array, int nb)
     for (int i = 0; data()->array[i] != NULL; i++)
         free(data()->array[i]);
     free(data()->array);
-    for (int i = 0; data()->pipe[i] != NULL; i++){
-        for (int j = 0; data()->pipe[i][j] != NULL; j++)
-            free(data()->pipe[i][j]);
-        free(data()->pipe[i]);
-    }
-    free(data()->pipe);
     if (nb == 1)
         return;
     for (int i = 0; array[i] != NULL; i++)
@@ -42,7 +36,6 @@ void init_env(char **env)
     char *vcontent;
 
     data()->env = NULL;
-    data()->nb_pipe = 0;
     while (env[i] != NULL){
         while (env[i][j] != '=' && env[i][j] != '\0')
             j++;

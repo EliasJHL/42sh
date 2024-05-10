@@ -14,8 +14,11 @@
 #include <sys/wait.h>
 #include <dirent.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <time.h>
 #define COMPARR(a, b) my_strcmp(data()->array[a], b)
+#define COND1 (verif(input,history)||access(data()->arg[data()->j][0],F_OK)==0)
+#define COND2 data()->arg[data()->j] != NULL
 #pragma once
 
 typedef struct env_t {
@@ -31,10 +34,18 @@ typedef struct history_s {
 } history_t;
 
 typedef struct shell_s {
+    char ***arg;
+    char **priority;
     char **array;
-    char ***pipe;
-    int nb_pipe;
+    int *nb_arg_arg;
+    int nb_priority;
     int nb_args;
+    int i;
+    int j;
+    int r_value;
+    int nfound;
+    char *input;
+    history_t *history;
     struct env_t *env;
 } shell_t;
 
@@ -43,7 +54,24 @@ typedef struct display_s {
     char *hostname;
 } display_t;
 
-void separate_pipe(void);
+void pexecute_history_command(char *input, history_t *history);
+int phandle_specific_commands(char *input, history_t *history);
+void create_path(char *input, history_t *history);
+int execute_command(char **env, char *command);
+int search_path(void);
+void launch_solo(char *input, history_t *history);
+void launch_prio(char *input, history_t *history);
+int my_cd(char **input);
+int verif_prio(char **input, int j);
+void count_arg(void);
+int verif_arg(char **input);
+void get_false_return(int status);
+void exec_and(char **env);
+void exec_dpipes(char **env);
+void exec_dredir_left(char **env, char **cmd, char *word);
+void exec_redir_left(char **env, char **cmd, char *filename);
+void exec_cmd(char **env, char **cmd1, char **cmd2);
+int separate_priority(void);
 void separate_command(char *arg, history_t *history);
 int mini_printf(const char *format, ...);
 char *my_strncpy(char *dest, char const *src, int n);

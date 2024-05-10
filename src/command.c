@@ -7,13 +7,13 @@
 
 #include "shell.h"
 
-static int my_cd2(void)
+static int my_cd2(char **input)
 {
     char cwd[1024];
 
     if (data()->nb_args == 1){
-        if (chdir(data()->array[1]) == -1){
-            mini_printf("%s: %s.\n", data()->array[1], strerror(errno));
+        if (chdir(input[1]) == -1){
+            mini_printf("%s: %s.\n", input[1], strerror(errno));
         } else {
             my_setenv(&data()->env, "OLDPWD", my_getenv(data()->env, "PWD"));
             my_setenv(&data()->env, "PWD", getcwd(cwd, sizeof(cwd)));
@@ -22,7 +22,7 @@ static int my_cd2(void)
     return 1;
 }
 
-int my_cd(void)
+int my_cd(char **input)
 {
     char cwd[1024];
 
@@ -36,71 +36,43 @@ int my_cd(void)
         my_setenv(&data()->env, "PWD", my_getenv(data()->env, "HOME"));
         return 1;
     }
-    if (my_strcmp(data()->array[1], "-") == 0){
+    if (my_strcmp(input[1], "-") == 0){
         chdir(my_getenv(data()->env, "OLDPWD"));
         my_setenv(&data()->env, "OLDPWD", my_getenv(data()->env, "PWD"));
         my_setenv(&data()->env, "PWD", getcwd(cwd, sizeof(cwd)));
         return 1;
     }
-    return my_cd2();
+    return my_cd2(input);
 }
 
-static int verif_arg2(void)
+static int verif_arg2(char **input)
 {
-    if (my_strcmp(data()->array[0], "env") == 0)
+    if (my_strcmp(input[0], "env") == 0)
         return disp(data()->env);
     return 0;
 }
 
-int verif_arg(void)
+int verif_arg(char **input)
 {
-    if (data()->array[0] == NULL)
+    if (input[0] == NULL)
         return 1;
-    if (my_strcmp(data()->array[0], "cd") == 0)
-        return my_cd();
-    if (my_strcmp(data()->array[0], "setenv") == 0){
+    if (my_strcmp(input[0], "cd") == 0)
+        return my_cd(input);
+    if (my_strcmp(input[0], "setenv") == 0){
         if (data()->nb_args == 2)
-            return my_setenv(&data()->env, data()->array[1], data()->array[2]);
+            return my_setenv(&data()->env, input[1], input[2]);
         if (data()->nb_args == 1)
-            return my_setenv(&data()->env, data()->array[1], "");
+            return my_setenv(&data()->env, input[1], "");
         if (data()->nb_args == 0)
             return disp(data()->env);
         return 1;
     }
     if (my_strcmp(data()->array[0], "unsetenv") == 0){
-        for (int i = 0; data()->array[i] != NULL; i++)
-            my_unsetenv(&data()->env, data()->array[i]);
+        for (int i = 0; input[i] != NULL; i++)
+            my_unsetenv(&data()->env, input[i]);
         return 1;
     }
-    return verif_arg2();
-}
-
-static void print_error(int error, char *command)
-{
-    if (errno == ENOEXEC)
-        mini_printf("%s: Exec format error. Wrong Architecture.\n", command);
-    else
-        mini_printf("%s: %s.\n", command, strerror(errno));
-}
-
-static int execute_command(char **env, char *command)
-{
-    pid_t pid = fork();
-    int status;
-
-    if (pid == 0) {
-        if (execve(data()->array[0], data()->array, env) == -1){
-            print_error(errno, command);
-            exit(0);
-        }
-    } else {
-        waitpid(pid, &status, 0);
-        if (status == 139)
-            mini_printf("Segmentation fault (core dumped)\n");
-        if (status == 11)
-            mini_printf("Segmentation fault\n");
-    }
-    return 0;
+    return verif_arg2(input);
 }
 
 static void create_filepath(char *path, char *file)
@@ -156,16 +128,15 @@ void execute_command_if_exists(char *command, char **env)
 void command(char *input, history_t *history)
 {
     char **env;
+    char *save;
+    int i = 0;
 
     separate_arg(input);
-    separate_pipe();
-    if (verif_arg()){
-        free_func(env, 1);
+    if (separate_priority())
+        return;
+    if (data()->nb_priority != 0){
+        launch_prio(input, history);
         return;
     }
-    if (handle_specific_commands(input, history) == 0) {
-        return;
-    }
-    env = array_env(data()->env);
-    execute_command_if_exists(data()->array[0], env);
+    launch_solo(input, history);
 }
