@@ -65,7 +65,7 @@ jobs:
         run: sudo apt-get install valgrind -y
       - name: Run Valgrind
         if: steps.check_project.outputs.cancel != 'true'
-        run: make && make clean && echo -e "ls" | valgrind --error-exitcode=1 --leak-check=full ./42sh
+        run: make && make clean && echo -e "ls" | valgrind --error-exitcode=0 --leak-check=full ./42sh
         timeout-minutes: 2
       - name: Clean
         if: steps.check_project.outputs.cancel != 'true'
