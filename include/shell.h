@@ -17,7 +17,8 @@
 #include <fcntl.h>
 #include <time.h>
 #define COMPARR(a, b) my_strcmp(data()->array[a], b)
-#define COND1 (verif(input,history)||access(data()->arg[data()->j][0],F_OK)==0)
+#define COND1_EXEC (access(data()->arg[data()->j][0], F_OK) == 0)
+#define COND1 (verif(input, history) || COND1_EXEC)
 #define COND2 data()->arg[data()->j] != NULL
 #pragma once
 
