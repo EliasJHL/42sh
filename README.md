@@ -49,7 +49,7 @@ Pour lancer 42sh, il suffit de taper la commande suivante dans un terminal:
 
 Ce projet est sous licence Apache License 2.0
 
-## Tester !
+## Testez !
 
 [![Exécuter sur Replit](https://replit.com/badge/github/EliasJHL/42sh)](https://replit.com/@elias-josuehajj/42sh)
 
